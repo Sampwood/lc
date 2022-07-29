@@ -1,5 +1,7 @@
+mod p1;
 mod p1480;
 mod p383;
+mod p412;
 
 fn main() {
     println!("Hello, world!");

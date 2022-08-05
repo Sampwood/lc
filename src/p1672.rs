@@ -5,15 +5,14 @@
  */
 
 // @lc code=start
+use std::cmp;
+
 impl Solution {
     fn maximum_wealth(accounts: Vec<Vec<i32>>) -> i32 {
         let mut max = 0;
     
         for ac in accounts {
-            let sum = ac.iter().sum();
-            if sum > max {
-                max = sum;
-            }
+            max = cmp::max(ac.iter().sum(), max);
         }
     
         max

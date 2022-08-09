@@ -41,54 +41,13 @@ fn main() {
     // let mid = p876::Solution::middle_node(Some(Box::new(node)));
     // println!("{:?}", mid);
 
-    println!("{:?}", merge_two_lists(None, None));
+    println!("{:?}", find_kth_largest(vec![1,2,3], 1));
 }
 
-#[derive(PartialEq, Eq, Clone, Debug)]
-pub struct ListNode {
-    pub val: i32,
-    pub next: Option<Box<ListNode>>,
-}
+pub fn find_kth_largest(nums: Vec<i32>, k: i32) -> i32 {
+    let mut res = nums;
 
-impl ListNode {
-    #[inline]
-    fn new(val: i32) -> Self {
-        ListNode { next: None, val }
-    }
-}
-pub fn merge_two_lists(
-    list1: Option<Box<ListNode>>,
-    list2: Option<Box<ListNode>>,
-) -> Option<Box<ListNode>> {
-    if list1.is_none() {
-        return list2;
-    } else if list2.is_none() {
-        return list1;
-    }
+    res.sort();
 
-    let mut head = ListNode::new(0);
-    let mut cur = &mut head;
-    let mut l1 = list1;
-    let mut l2 = list2;
-
-    while let (Some(i1), Some(i2)) = (l1.as_ref(), l2.as_ref()) {
-        if i1.val <= i2.val {
-            cur.next = l1;
-            cur = cur.next.as_mut().unwrap();
-            l1 = cur.next.take();
-        } else {
-            cur.next = l2;
-            cur = cur.next.as_mut().unwrap();
-            l2 = cur.next.take();
-        }
-    }
-
-    if l1.is_none() {
-        cur.next = l2;
-    } else {
-        cur.next = l1;
-    }
-
-
-    head.next
+    res[res.len() - k as usize]
 }
